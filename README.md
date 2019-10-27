@@ -14,7 +14,16 @@ The backend is coded in Java (Spring boot), but it doesn't matter. The Web servi
 
 # The frontend app
 
-The frontend (also coded in Java Spring boot) requests the backend service and concatenates the result "World !" with "Hello": https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/java/com/example/FrontEnd/FrontEndApplication.java
+The frontend (also coded in Java Spring boot) requests the backend service:
+
+estTemplate restTemplate = new RestTemplate();
+String s = restTemplate.getForObject(backEndURL, String.class);
+
+and concatenates and returns the result "World !" with "Hello": 
+
+return "hello (from the front end)" + " " + s + " (from the back end)";
+
+https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/java/com/example/FrontEnd/MyWebService.java
 
 # Kubernestes configuration file
 
