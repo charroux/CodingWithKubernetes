@@ -35,10 +35,9 @@ A single yaml file is enough to configure the cluster: https://github.com/charro
 
 Note first of all how configurations are separated from each other with ---
 
-This yaml file contains :
+This yaml file contains:
 
-## The frontend deployment
-
+## The frontend deployment
 
 ```
 apiVersion: apps/v1
