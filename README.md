@@ -166,10 +166,11 @@ The pattern to build such Kubernetes address is: <service_name>.<name_space>.svc
   - cluster_name: cluster.local
   - ClusterIP port: 80/hello
   
-Accessing the service
-
-
-pattern for any service : <service_name>.<name_space>. svc.<cluster_name>:
+The backend address is injected inside the frontend app (https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/java/com/example/FrontEnd/MyWebService.java) with:
+```
+@Value("${backEndURL}")
+String backEndURL;
+```
   
 ## The configuration of the ingress controller 
 
