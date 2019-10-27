@@ -30,7 +30,7 @@ https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/j
 
 A single yaml file is enough to configure the cluster: https://github.com/charroux/CodingWithKubernetes/blob/master/front-back-app.yml
 
-Note first of all how configurations are separated from other with ---
+Note first of all how configurations are separated from each other with ---
 
 This yaml file contains :
 
