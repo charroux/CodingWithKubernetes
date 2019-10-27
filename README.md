@@ -156,7 +156,7 @@ NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
 kube-dns   ClusterIP   10.43.0.10   <none>        53/UDP,53/TCP,9153/TCP   3d3h
 ```
 
-Apps sometimes store such laddress as constants in the code. This is a violation of twelve-factor (https://12factor.net/). This address is stored in a property files of the frontend: https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/resources/application.yml
+Aa soon as the DNS service is running, the frontend app can aks the DNS to resolv the backend address. Apps sometimes store such address as constants in the code. This is a violation of twelve-factor (https://12factor.net/). Here, this address is stored in a property files of the frontend: https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/resources/application.yml
 
 The pattern to build such Kubernetes address is: <service_name>.<name_space>.svc.<cluster_name>:<ClusterIP port>
   
