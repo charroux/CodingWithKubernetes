@@ -39,6 +39,7 @@ This yaml file contains :
 
 ## The frontend deployment
 
+
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -65,6 +66,7 @@ Note the last line "imagePullPolicy: Always". Hence, each time the deployement i
 - wihtout imagePullPolicy and specify the imahe tag
 
 ## The frontend service in front of the deployment
+
 ```
 apiVersion: v1
 kind: Service
@@ -81,6 +83,7 @@ app: front-end
 where targetPort is the port used by the frontend web service.
 
 ## The backend deployment
+
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -101,7 +104,9 @@ spec:
           image: efrei/back-end:1   
           imagePullPolicy: Always
 ```          
-## The backend service in front of the deployment          
+
+## The backend service in front of the deployment
+
 ```
 apiVersion: v1
 kind: Service
@@ -133,6 +138,7 @@ The pattern to build such Kubernetes address is: <service_name>.<name_space>.svc
 ## The configuration of the ingress controller 
 
 Go back to the previous tutorial to discover why an Ingress controller is useful: https://github.com/charroux/kubernetes
+
 ```
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -153,9 +159,11 @@ spec:
 It uses Traefik as the Ingress controller (See https://github.com/charroux/kubernetes) 
 
 ## Launching the deployment
+
 ```
 kubectl apply -f front-back-app.yml
 ```
+
 Check if all resources are available: 
 ```
 kubectl get all
