@@ -255,7 +255,7 @@ Where front-end.localhost has been set in the above Ingress configuration.
 
 ## Behind the scene
 
-Lauch the Shell inside the containner:
+Lauch the Shell inside the frontend container:
 ```
 kubectl exec -it deployment.apps/back-end-deployment sh
 ```
