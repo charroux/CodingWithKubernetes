@@ -124,7 +124,7 @@ Notice the type set to ClusterIP. A Kubernetes Service is an abstraction which d
 
 ## How the frontend can reache the backend ?
 
-Kubernetes supports 2 primary modes of finding a Service - environment variables and DNS. The former works out of the box while the latter requires the CoreDNS cluster addon.
+Kubernetes supports 2 primary modes of finding a Service - environment variables and DNS (Domain Name Server). The former works out of the box while the latter requires the CoreDNS cluster addon.
 
 
 Using environment variables: when a Pod runs on a Node, the kubelet adds a set of environment variables for each active Service:
