@@ -124,6 +124,38 @@ Notice the type set to ClusterIP. A Kubernetes Service is an abstraction which d
 
 ## How the frontend can reache the backend ?
 
+Kubernetes supports 2 primary modes of finding a Service - environment variables and DNS. The former works out of the box while the latter requires the CoreDNS cluster addon.
+
+
+Using environment variables: when a Pod runs on a Node, the kubelet adds a set of environment variables for each active Service:
+```
+kubectl exec podsName -- printenv | grep SERVICE
+```
+
+where podsName is obtained with: 
+```
+kubectl get pods
+```
+```
+NAME                                    READY   STATUS    RESTARTS   AGE
+back-end-deployment-5dbf4f845c-hpszd    1/1     Running   0          3h50m
+front-end-deployment-666cbf7cb9-lz44d   1/1     Running   0          3h50m
+```
+
+Those variables are : 
+- SERVICE_NAME_SERVICE_HOST 
+- SERVICE_NAME_SERVICE_PORT
+
+Using DNS: Kubernetes offers a DNS cluster addon Service that automatically assigns dns names to other Services. You can check if it’s running on your cluster:
+
+```
+kubectl get services kube-dns --namespace=kube-system
+```
+```
+NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
+kube-dns   ClusterIP   10.43.0.10   <none>        53/UDP,53/TCP,9153/TCP   3d3h
+```
+
 Apps sometimes store such laddress as constants in the code. This is a violation of twelve-factor (https://12factor.net/). This address is stored in a property files of the frontend: https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/resources/application.yml
 
 The pattern to build such Kubernetes address is: <service_name>.<name_space>.svc.<cluster_name>:<ClusterIP port>
@@ -133,6 +165,11 @@ The pattern to build such Kubernetes address is: <service_name>.<name_space>.svc
   - name_space: default
   - cluster_name: cluster.local
   - ClusterIP port: 80/hello
+  
+Accessing the service
+
+
+pattern for any service : <service_name>.<name_space>. svc.<cluster_name>:
   
 ## The configuration of the ingress controller 
 
@@ -167,6 +204,7 @@ Check if all resources are available:
 ```
 kubectl get all
 ```
+```
 NAME                                        READY   STATUS    RESTARTS   AGE
 pod/back-end-deployment-5dbf4f845c-hpszd    1/1     Running   0          3h17m
 pod/front-end-deployment-666cbf7cb9-lz44d   1/1     Running   0          3h17m
@@ -183,14 +221,34 @@ deployment.apps/front-end-deployment   1/1     1            1           3h17m
 NAME                                              DESIRED   CURRENT   READY   AGE
 replicaset.apps/back-end-deployment-5dbf4f845c    1         1         1       3h17m
 replicaset.apps/front-end-deployment-666cbf7cb9   1         1         1       3h17m
-
+```
 
 Retreive the Ingress controller state: 
 ```
 kubectl get ingress
 ```
+
+```
 NAME                HOSTS                 ADDRESS     PORTS   AGE
 front-end-ingress   front-end.localhost   10.0.2.15   80      3h51m
+```
+
+Get the clusterIP with: 
+```
+kubectl get back-end-service
+```
+
+Pods are exposed through endpoints:
+```
+kubectl get ep back-end-service
+```
+
+```
+NAME               ENDPOINTS          AGE
+back-end-service   10.42.0.121:8080   3h46m
+```
+
+gets the clusterIP and the port. Then, you should now be able to access the service on : from any node in the cluster. Note that the Service IP is completely virtual, it never hits the wire.
 
 Test the apps in your web browser at this URL: http://front-end.localhost/
 
