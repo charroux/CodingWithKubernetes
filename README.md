@@ -1,6 +1,6 @@
 # CodingWithKubernetes
 
-How to code a web app composed of two web service :
+How to code a web app composed of two web services:
 - a frontend
 - a backend
 
