@@ -15,6 +15,8 @@ spec:
       containers:
       - name: front-end-container
         image: efrei/front-end:1
+        imagePullPolicy: Always
+---
 
 apiVersion: apps/v1
 kind: Deployment
@@ -33,6 +35,8 @@ spec:
       containers:
         - name: back-end-container
           image: efrei/back-end:1
+          imagePullPolicy: Always
+---
 
 apiVersion: v1
 kind: Service
@@ -45,6 +49,7 @@ spec:
       port: 80
   selector:
     app: front-end
+---
 
 apiVersion: v1
 kind: Service
@@ -58,6 +63,7 @@ spec:
   type: ClusterIP
   selector:
     app: back-end
+---
 
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -74,3 +80,4 @@ spec:
             backend:
               serviceName: front-end-service
               servicePort: http
+
