@@ -16,9 +16,10 @@ The backend is coded in Java (Spring boot), but it doesn't matter. The Web servi
 
 The frontend (also coded in Java Spring boot) waits for an HTTP get on "/". Then it requests the backend service:
 
+```jave
 restTemplate restTemplate = new RestTemplate();
-
 String s = restTemplate.getForObject(backEndURL, String.class);
+```
 
 and concatenates and returns the result "World !" with "Hello": 
 
