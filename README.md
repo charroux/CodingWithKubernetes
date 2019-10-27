@@ -12,6 +12,8 @@ This tutorial assume that you have already installed Kubernetes. If not, follow 
 
 The backend is coded in Java (Spring boot), but it doesn't matter. The Web service simply return "World !" when it receives an HTTP Get on "/hello": https://github.com/charroux/CodingWithKubernetes/blob/master/BackEnd/src/main/java/com/example/BackEnd/MyWebService.java
 
+A Docker image is already available is the docker hub at: https://hub.docker.com/u/efrei, and this tutorial uses it. But feel free to rebuild it. All the code plus the Dockerfile are there: https://github.com/charroux/CodingWithKubernetes/tree/master/FrontEnd
+
 # The frontend app
 
 The frontend (also coded in Java Spring boot) waits for an HTTP get on "/". Then it requests the backend service:
@@ -28,6 +30,9 @@ return "hello (from the front end)" + " " + s + " (from the back end)";
 ```
 
 https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/java/com/example/FrontEnd/MyWebService.java
+
+A Docker image is already available is the docker hub at: https://hub.docker.com/u/efrei, and this tutorial uses it. But feel free to rebuild it. All the code plus the Dockerfile are there: https://github.com/charroux/CodingWithKubernetes/tree/master/BackEnd
+
 
 # Kubernestes configuration file
 
