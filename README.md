@@ -60,7 +60,7 @@ spec:
         imagePullPolicy: Always
 ```
 
-Note the last line "imagePullPolicy: Always". Hence, each time the deployement is done, the image is pull from Docker hub. Which is usefull at development stage. The other choices are 
+Note the last line "imagePullPolicy: Always". Hence, each time the deployement is done, the image is pulled from the Docker hub. Which is usefull at development stage. The other choices are 
 - without imagePullPolicy and :latest as the image tag
 - wihtout imagePullPolicy and specify the imahe tag
 
