@@ -249,11 +249,43 @@ NAME               ENDPOINTS          AGE
 back-end-service   10.42.0.121:8080   3h46m
 ```
 
-gets the clusterIP and the port. Then, you should now be able to access the service on : from any node in the cluster. Note that the Service IP is completely virtual, it never hits the wire.
-
 Test the apps in your web browser at this URL: http://front-end.localhost/
 
 Where front-end.localhost has been set in the above Ingress configuration.
+
+## Behind the scene
+
+Lauch the Shell inside the containner:
+```
+kubectl exec -it deployment.apps/back-end-deployment sh
+```
+
+deployment.apps/back-end-deployment comes from: kubectl get all
+
+Where "kubectl exec" runs the command interpreter "sh", -it for the interactive mode.
+
+Then ask the DNS to solve the backend address with:
+```
+nslookup back-end-service
+``` 
+```
+Name:      back-end-service
+Address 1: 10.43.22.135 back-end-service.default.svc.cluster.local
+```
+Now check again the Spring property file for the frontand app: https://github.com/charroux/CodingWithKubernetes/blob/master/FrontEnd/src/main/resources/application.yml
+
+It matches !
+
+Those information comes from a file. Get its content:
+```
+cat /etc/resolv.conf
+```
+It displays:
+```
+search default.svc.cluster.local svc.cluster.local cluster.local
+nameserver 10.43.0.10
+options ndots:5
+```
 
 ## Delete resources
 
