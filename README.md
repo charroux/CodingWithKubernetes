@@ -127,7 +127,7 @@ app: back-end
 ```
 Notice the type set to ClusterIP. A Kubernetes Service is an abstraction which defines a logical set of Pods running somewhere in the cluster, that all provide the same functionality. When created, each Service is assigned a unique IP address (also called clusterIP). This address is tied to the lifespan of the Service, and will not change while the Service is alive.
 
-## How the frontend can reache the backend ?
+## Service discovery: how the frontend can reache the backend ?
 
 Kubernetes supports 2 primary modes of finding a Service - environment variables and DNS (Domain Name Server). The former works out of the box while the latter requires the CoreDNS cluster addon.
 
