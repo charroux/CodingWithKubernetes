@@ -47,6 +47,7 @@ spec:
     - name: http
       targetPort: 8080
       port: 80
+  type: NodePort
   selector:
     app: front-end
 ---

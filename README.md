@@ -177,7 +177,19 @@ The backend address is injected inside the frontend app (https://github.com/char
 String backEndURL;
 ```
   
+## Test the app from a Web browser
+
+Since the kind of the front-end service is NodePort you can get its IP address with: 
+```
+minikube service front-end-service --url 
+```
+
+Then test the app with a Web browser.
+
 ## The configuration of the ingress controller 
+
+This part will not work with the latest version of Minikube which doesn't support Ingress. 
+
 
 Go back to the previous tutorial to discover why an Ingress controller is useful: https://github.com/charroux/kubernetes
 
