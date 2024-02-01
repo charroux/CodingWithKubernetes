@@ -64,21 +64,3 @@ spec:
   type: ClusterIP
   selector:
     app: back-end
----
-
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: front-end-ingress
-  annotations:
-    kubernetes.io/ingress.class: traefik
-spec:
-  rules:
-    - host: front-end.localhost
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: front-end-service
-              servicePort: http
-
